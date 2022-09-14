@@ -11,6 +11,8 @@ def jogar():
 
     letras_acertadas = inicializar_letras_acertadas(palavra_secreta)
 
+    letras_utilizadas = []
+
     enforcou = False
     acertou = False
     erros = 0
@@ -22,13 +24,20 @@ def jogar():
 
         chute = pedir_chute()
 
+        if (chute in letras_utilizadas):
+            print("Essa letra ja foi utlizada!!!")
+            print(letras_utilizadas)
+            continue
+
         if (chute in palavra_secreta):
+            letras_utilizadas.append(chute)
             index = 0
             for letra in palavra_secreta:
                 if (chute == letra):
                     letras_acertadas[index] = letra
                 index += 1
         else:
+            letras_utilizadas.append(chute)
             erros += 1
             desenha_forca(erros)
 
@@ -40,6 +49,7 @@ def jogar():
             break
         if ("_" not in letras_acertadas):
             break
+
         print(letras_acertadas)
 
     # if (acertou):
