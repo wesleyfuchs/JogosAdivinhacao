@@ -30,13 +30,13 @@ def jogar():
                 index += 1
         else:
             erros += 1
-            print("Ops, você errou! Faltam {} tentativas.".format(6 - erros))
+            desenha_forca(erros)
 
         # enforcou = erros == 6
         # acertou = "_" not in letras_acertadas
         # print(letras_acertadas)
 
-        if (erros == 6):
+        if (erros == 7):
             break
         if ("_" not in letras_acertadas):
             break
@@ -48,10 +48,10 @@ def jogar():
     #     print("Voce perdeu :(")
 
     if ("_" not in letras_acertadas):
-        print("Você ganhou!!")
+        imprime_mensagem_vencedor()
     else:
-        print("Você perdeu!!")
-        print("A palavra era {}".format(palavra_secreta))
+        imprime_mensagem_perdedor(palavra_secreta)
+
     print("Fim do jogo")
 
 
@@ -85,6 +85,74 @@ def pedir_chute():
     chute = chute.strip().upper()  # tratar entrada (tirar espaços da entrada, deixar maiusculo)
     return chute
 
+
+def desenha_forca(erros):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if(erros == 1):
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 2):
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 3):
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 4):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 5):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if(erros == 6):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (erros == 7):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
+
+
+def imprime_mensagem_vencedor():
+    print("Você ganhou!")
+    print("       ___________      ")
+    print("      '._==_==_=_.'     ")
+    print("      .-\\:      /-.    ")
+    print("     | (|:.     |) |    ")
+    print("      '-|:.     |-'     ")
+    print("        \\::.    /      ")
+    print("         '::. .'        ")
+    print("           ) (          ")
+    print("         _.' '._        ")
+    print("        '-------'       ")
+
+def imprime_mensagem_perdedor(palavra):
+    print("A palavra era {}".format(palavra))
+    print("Você perdeu!")
 
 if (__name__ == "__main__"):  #sempre colocar no fim do arquivo
     jogar()
