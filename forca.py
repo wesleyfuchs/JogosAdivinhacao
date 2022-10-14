@@ -4,64 +4,49 @@ import random
 
 
 def jogar():
-
     mensagem_introducao()
-
     palavra_secreta = carregar_palavra_secreta()
-
     letras_acertadas = inicializar_letras_acertadas(palavra_secreta)
-
     letras_utilizadas = []
-
-    enforcou = False
-    acertou = False
     erros = 0
-
+    
     print(letras_acertadas)
-
-    # while (not enforcou and not acertou):
+    
+    # while erros < 7 ou _ not in letras acertadas
     while True:
-
         chute = pedir_chute()
 
-        if (chute in letras_utilizadas):
-            print("Essa letra ja foi utlizada!!!")
-            print(letras_utilizadas)
-            continue
-
-        if (chute in palavra_secreta):
-            letras_utilizadas.append(chute)
-            index = 0
-            for letra in palavra_secreta:
-                if (chute == letra):
-                    letras_acertadas[index] = letra
-                index += 1
+        if (chute not in letras_utilizadas):
+            if (chute in palavra_secreta):
+                index = 0
+                for letra in palavra_secreta:
+                    if (chute == letra):
+                        letras_acertadas[index] = letra
+                    index += 1
+            else:
+                erros += 1
+                desenha_forca(erros)
         else:
-            letras_utilizadas.append(chute)
-            erros += 1
-            desenha_forca(erros)
+            print("Essa letra ja foi utlizada!!!")
+            print(list(set(letras_utilizadas)))
 
-        # enforcou = erros == 6
-        # acertou = "_" not in letras_acertadas
-        # print(letras_acertadas)
-
+        letras_utilizadas.append(chute)
+        
+        #Checa se ganhou ou perdeu
         if (erros == 7):
             break
         if ("_" not in letras_acertadas):
             break
 
         print(letras_acertadas)
-
-    # if (acertou):
-    #     print("Voce ganhou!!")
-    # else:
-    #     print("Voce perdeu :(")
-
+    #Fim programa principal
+    
+    # Mensagem de vitoria/derrota
     if ("_" not in letras_acertadas):
         imprime_mensagem_vencedor()
     else:
         imprime_mensagem_perdedor(palavra_secreta)
-
+        
     print("Fim do jogo")
 
 
@@ -163,6 +148,7 @@ def imprime_mensagem_vencedor():
 def imprime_mensagem_perdedor(palavra):
     print("A palavra era {}".format(palavra))
     print("Você perdeu!")
+
 
 if (__name__ == "__main__"):  #sempre colocar no fim do arquivo
     jogar()
